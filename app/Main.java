@@ -9,26 +9,24 @@ import obj.Report;
 import serv.ServImpl;
 public class Main {
     public static void main(String[] args) throws Exception {
-        ServImpl service;
-        Roddit roddit=new Roddit();
-        Date systemDate=new Date();
-        User currentUser=new User("neomihnea", systemDate); //if more users are logged in at once, they all get a copy of this
-        User alterUser=new User("neomihnea2", systemDate);
-        roddit.signup(currentUser, "neomihnea");
-        roddit.login(currentUser, "neomihnea");
-        roddit.addSub(currentUser, "totul");
-        //let's post something here, innit?
-        Subroddit totul=roddit.getSubByName("totul");
-        totul.addMod(alterUser);
-        TopLevelPost firstPost=new TopLevelPost("Should have been a cowboy", "I bet you never heard old marshal Dillon say", totul, currentUser);
-        totul.makePost(firstPost);
-        totul.getPostByIndex(0).vote(currentUser, true);
-        totul.getPostByIndex(0).makeComment("Miss Kitty, have you ever thought of running away?");
-        System.out.println(currentUser.getKarma());
-        Report x=new Report(currentUser, firstPost, "Arda zi");
-        x.log();
-        Feed newFeed=new Feed(totul);
-        newFeed.expose();
+        ServImpl service=new ServImpl();
+        service.signup("alice", "pass1");
+        service.signup("bernardo", "pass2");
+
+        service.login("alice", "pass1");
+        service.login("bernardo", "pass2");
+        service.makeSubreddit("sub1", "bernardo");
+        service.grantModness("sub1", "alice");
+        Subroddit sub1=service.getSubByName("sub1");
+        service.makePost("sub1", "I am Bernardo", "This is Bernardo and I'm here to rock", "bernardo");
+        TopLevelPost examplePost=sub1.getPostByIndex(0);
+        service.vote("alice", examplePost, true);
+        service.comment(examplePost, "And I am Alice");
+        service.printThread(examplePost);
+        service.getFeed("sub1");//this is a 
+        service.getKarma("alice");
+        service.reportPost("alice", examplePost, "Testing reasons");
+
     }
 }
 //CAPABILITIES:

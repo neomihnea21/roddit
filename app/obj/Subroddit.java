@@ -31,4 +31,7 @@ public class Subroddit{
     public TopLevelPost getPostByIndex(int i){
       return posts.get(i);
     }
+    public String getName(){
+      return name;
+    }
 }

@@ -15,6 +15,7 @@ public class ServImpl implements Serv{
     public ServImpl(){
         roddit=new Roddit();
         systemDate=new Date();
+        userReference=new HashMap<>();
     }
     public void signup(String username, String password){
          User newUser=new User(username, systemDate);
@@ -64,5 +65,8 @@ public class ServImpl implements Serv{
     public void getKarma(String User){
         User sought=userReference.get(User);
         System.out.println(sought.getKarma());
+    }
+    public Subroddit getSubByName(String name){
+        return roddit.getSubByName(name);
     }
 }

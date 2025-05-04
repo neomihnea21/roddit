@@ -41,5 +41,5 @@ public class Roddit{
     }
     public Subroddit getSubByName(String key){
         return subs.get(key);
-    } 
+    }
 }

@@ -6,8 +6,10 @@ import obj.Feed;
 import obj.Post;
 import obj.TopLevelPost;
 import obj.Report;
+import serv.ServImpl;
 public class Main {
     public static void main(String[] args) throws Exception {
+        ServImpl service;
         Roddit roddit=new Roddit();
         Date systemDate=new Date();
         User currentUser=new User("neomihnea", systemDate); //if more users are logged in at once, they all get a copy of this
@@ -17,12 +19,14 @@ public class Main {
         roddit.addSub(currentUser, "totul");
         //let's post something here, innit?
         Subroddit totul=roddit.getSubByName("totul");
+        totul.addMod(alterUser);
         TopLevelPost firstPost=new TopLevelPost("Should have been a cowboy", "I bet you never heard old marshal Dillon say", totul, currentUser);
         totul.makePost(firstPost);
         totul.getPostByIndex(0).vote(currentUser, true);
         totul.getPostByIndex(0).makeComment("Miss Kitty, have you ever thought of running away?");
         System.out.println(currentUser.getKarma());
-
+        Report x=new Report(currentUser, firstPost, "Arda zi");
+        x.log();
         Feed newFeed=new Feed(totul);
         newFeed.expose();
     }

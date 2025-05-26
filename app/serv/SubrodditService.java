@@ -41,7 +41,7 @@ public class SubrodditService {
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id") + ", Title: " + rs.getString("title"));
+                System.out.println("ID: " + rs.getInt("sub_id") + ", Title: " + rs.getString("title"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class SubrodditService {
             stmt.setString(1, title); // Set the title parameter
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    subrodditId = rs.getInt("id"); // Retrieve the ID
+                    subrodditId = rs.getInt("sub_id"); // Retrieve the ID
                 }
             }
         } catch (SQLException e) {

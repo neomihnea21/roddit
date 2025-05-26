@@ -21,15 +21,21 @@ public class UserService{
     public static UserService getInstance(){
         return instance;
     }
-    /*public void createUser(String name, String password){
-       String command="INSERT INTO reddit_app.users (username, pass) VALUES (" + name + ", " +password+ ");"; //ik this is dumb AF, but it's all I can do
-       try(Connection conn=db.getConnection(); PreparedStatement stmt = conn.prepareStatement(command)){
-            int rowsInserted=stmt.executeUpdate();
-       }
-       catch(SQLException e){
-           e.printStackTrace();
-       }
-    }*/
+    public void createUser(int user_id, String name, String password) {
+        String sql = "INSERT INTO reddit_app.users (user_id, name, password) VALUES (?, ?, ?);";
+        try (Connection conn = db.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, user_id);
+            stmt.setString(2, name);
+            stmt.setString(3, password);
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new user was inserted successfully!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public int getUserIdByName(String name) {
         String sql = "SELECT user_id FROM reddit_app.users WHERE username = ?";
         int userId = -1; // Default to -1 if not found

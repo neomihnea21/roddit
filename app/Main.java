@@ -7,13 +7,14 @@ import obj.Post;
 import obj.TopLevelPost;
 import obj.Report;
 import serv.ServImpl;
+import serv.SubrodditService;
+import serv.UserService;
 import conn.DbConnection;
 public class Main {
     public static void main(String[] args) throws Exception {
         ServImpl service=new ServImpl();
         service.signup("alice", "pass1");
         service.signup("bernardo", "pass2");
-
         service.login("alice", "pass1");
         service.login("bernardo", "pass2");
         service.makeSubreddit("sub1", "bernardo");
@@ -28,7 +29,6 @@ public class Main {
         service.getKarma("alice");
         service.reportPost("alice", examplePost, "Testing reasons");
         service.editName("alice", "alicja");
-        service.deleteName("alicja");
     }
 }
 //CAPABILITIES:

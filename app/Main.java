@@ -7,6 +7,7 @@ import obj.Post;
 import obj.TopLevelPost;
 import obj.Report;
 import serv.ServImpl;
+import conn.DbConnection;
 public class Main {
     public static void main(String[] args) throws Exception {
         ServImpl service=new ServImpl();
@@ -26,7 +27,8 @@ public class Main {
         service.getFeed("sub1");//this is a 
         service.getKarma("alice");
         service.reportPost("alice", examplePost, "Testing reasons");
-
+        service.editName("alice", "alicja");
+        service.deleteName("alicja");
     }
 }
 //CAPABILITIES:

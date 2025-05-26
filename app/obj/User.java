@@ -5,7 +5,7 @@ public class User {
     private String username;
     private Date creationDate;
     private int karma;
-    private HashSet<Post> votedPosts;
+    //private HashSet<Post> votedPosts;
     public User(String user, Date creation){
         username=user;
         creationDate=creation;
@@ -26,5 +26,8 @@ public class User {
     }
     public int getKarma(){
         return karma;
+    }
+    public void changeName(String newName){
+        this.username=newName;
     }
 }

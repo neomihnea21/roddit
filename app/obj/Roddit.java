@@ -6,11 +6,22 @@ public class Roddit{
     private HashMap<String, String> accounts; //this holds (user, password) keys, where the key is held encrypted
     private HashMap<String, Subroddit> subs;
     private HashSet<String> loggedInUsers;
+    private HashMap<Post, Integer> postCodes;
+    int postIdMaker;
     //TASK: move this to a database
     public Roddit(){
         accounts=new HashMap<>();
         subs=new HashMap<>();
         loggedInUsers=new HashSet<>();
+        postCodes=new HashMap<>();
+        postIdMaker=0;
+    }
+    public void logPost(Post p){
+        postCodes.put(p, postIdMaker);
+        postIdMaker++;
+    }
+    public int getCode(Post p){
+        return postCodes.get(p);
     }
     public void signup(User user, String password){
       if(accounts.containsKey(user.getName()) == false){
